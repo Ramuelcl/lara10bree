@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- layouts.app.blade.php -->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
@@ -31,7 +32,7 @@
 
         <!-- Page Content -->
         <main>
-            {{ $slot ?? 'gfhgc,hgv;h' }}
+            {{ $slot ?? 'nada que mostrar' }}
         </main>
     </div>
 </body>

@@ -16,8 +16,12 @@ use Illuminate\Support\Facades\{App, Artisan, File, Route};
 */
 Route::group([], function () {
     Route::get('/', function () {
-        return view('layouts.app');
+        return view('welcome');
     })->name('home');
+
+    Route::get('/prueba', function () {
+        return 'prueba';
+    })->name('prueba');
 
     Route::get('/storagelink', function () {
         // Crear el enlace simbólico

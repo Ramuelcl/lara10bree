@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- layouts.guest.blade.php -->
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 
 <head>
