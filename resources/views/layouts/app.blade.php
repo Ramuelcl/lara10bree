@@ -29,10 +29,9 @@
                 </div>
             </header>
         @endif
-
         <!-- Page Content -->
         <main>
-            {{ $slot ?? 'nada que mostrar' }}
+            {{ $slot ?? null }}
         </main>
     </div>
 </body>
