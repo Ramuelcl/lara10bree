@@ -18,15 +18,14 @@
     {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}
 </head>
 
-<body class="antialiased bg-gray-100 dark:bg-gray-900">
+<body class="antialiased bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100">
     <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
         <div @click.away="open = false"
             class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-white md:w-64 dark:text-gray-200 dark:bg-gray-800"
             x-data="{ open: false }">
             <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
                 <a href="#"
-                    class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">Flowtrail
-                    UI</a>
+                    class="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark:text-white focus:outline-none focus:shadow-outline">{{ __($NombreEmpresa ?? 'Guzanet') }}</a>
                 <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
                     <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
                         <path x-show="!open" fill-rule="evenodd"
@@ -74,9 +73,50 @@
                             <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                                 href="#">Link #3</a>
                         </div>
+
                     </div>
+                    @if (Route::has('login'))
+                        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                            @auth
+                                <a href="{{ url('/dashboard') }}"
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}"
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
+                                    in</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}"
+                                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                    <!-- Authentication -->
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{ route('logout') }}"
+                                class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark:bg-transparent dark:hover:bg-gray-600 dark:focus:bg-gray-600 dark:focus:text-white dark:hover:text-white dark:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </a>
+                        </form>
+                    @endauth
+
                 </div>
             </nav>
+        </div>
+        <div class="w-full">
+            <header class="bg-gray-100 dark:bg-gray-700 shadow-sm">
+                <div class="ml-4 py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header ?? null }}
+                </div>
+
+            </header>
+            <main>
+                {{ $slot }}
+            </main>
         </div>
     </div>
 </body>
