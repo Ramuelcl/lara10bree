@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .pagination a {
+        @apply text-gray-800 dark:text-gray-200 font-medium;
+    }
+
+    .pagination .active a {
+        @apply text-white bg-blue-700 dark:bg-blue-200;
+    }
+
+    .pagination .disabled a {
+        @apply text-gray-400 cursor-not-allowed;
+    }
+}
