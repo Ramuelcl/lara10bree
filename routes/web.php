@@ -28,7 +28,7 @@ Route::group([], function () {
         Artisan::call('storage:link');
 
         // Crear directorios si no existen
-        $directories = ['app', 'avatars', 'flags'];
+        $directories = ['app', 'avatars', 'flags', 'icons'];
         foreach ($directories as $directory) {
             $target = '../../storage/app/public/images/' . $directory;
             $shortcut = public_path('storage/images/' . $directory);

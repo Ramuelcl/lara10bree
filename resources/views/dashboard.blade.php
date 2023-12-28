@@ -33,7 +33,7 @@
                                             Photo</th>
                                         <th scope="col" class="flex flex-row px-6 py-3 justify-end">
                                             <div class="m-2">
-                                                @hasanyrole('super-admin|admin|writer')
+                                                @hasanyrole('Super-Admin|admin|writer')
                                                     <a href="#"
                                                         class="mx-1 p-2 bg-blue-400 rounded">{{-- {{ route('users.create') }} --}}
                                                         {{ __('Create') }}
@@ -53,10 +53,16 @@
                                             <td class="px-6 py-4 whitespace-nowrap">{{ $data->is_active ? 'Si' : 'No' }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $data->profile_photo_path ?? null }}
+                                                @if (Storage::exists($data->profile_photo_path))
+                                                    <img src="{{ Storage::url($data->profile_photo_path) }}"
+                                                        class="w-5">
+                                                @else
+                                                    <img src="{{ Storage::url('public/images/avatars/default.png') }}"
+                                                        class="w-5">
+                                                @endif
                                             </td>
                                             <td class="px-6 py-4 text-right text-sm">
-                                                @hasanyrole('super-admin|admin|editor')
+                                                @hasanyrole('Super-Admin|admin|editor')
                                                     <a href="#"
                                                         class="m-2 p-2 bg-green-400 rounded">{{ __('Edit') }}</a>
                                                     {{-- {{ route('users.edit', $data->id) }} --}}
