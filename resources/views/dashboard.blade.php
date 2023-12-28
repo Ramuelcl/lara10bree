@@ -6,11 +6,77 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="ml-4 px-2">
-            <div class="bg-gray-100 dark:bg-gray-700 overflow-hidden shadow-md sm:rounded-lg">
-                <div class="p-6 bg-gray-100 dark:bg-gray-800">
-                    {{ __("You're logged in!") }}
+        <div class="py- m-6">
+
+            <div class="py- m-6">
+
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50 dark:bg-gray-600 dark:text-gray-200">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 tracking-wider">
+                                            Id</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 tracking-wider">
+                                            Name</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 tracking-wider">
+                                            @Mail</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 tracking-wider">
+                                            Active?</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 tracking-wider">
+                                            Photo</th>
+                                        <th scope="col" class="flex flex-row px-6 py-3 justify-end">
+                                            <div class="m-2">
+                                                @hasanyrole('super-admin|admin|writer')
+                                                    <a href="#"
+                                                        class="mx-1 p-2 bg-blue-400 rounded">{{-- {{ route('users.create') }} --}}
+                                                        {{ __('Create') }}
+                                                    </a>
+                                                @endhasanyrole
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-gray-100 dark:bg-gray-700 divide-y divide-gray-200">
+
+                                    @foreach (App\Models\User::all() as $data)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $data->id }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $data->name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $data->email }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $data->is_active ? 'Si' : 'No' }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                {{ $data->profile_photo_path ?? null }}
+                                            </td>
+                                            <td class="px-6 py-4 text-right text-sm">
+                                                @hasanyrole('super-admin|admin|editor')
+                                                    <a href="#"
+                                                        class="m-2 p-2 bg-green-400 rounded">{{ __('Edit') }}</a>
+                                                    {{-- {{ route('users.edit', $data->id) }} --}}
+                                                @endhasanyrole
+                                                @hasanyrole('super-admin|admin')
+                                                    <a href="#"
+                                                        class="m-2 p-2 bg-red-400 rounded">{{ __('Delete') }}</a>
+                                                @endhasanyrole
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    <!-- More items... -->
+                                </tbody>
+                            </table>
+                            <div class="m-2 p-2">Pagination</div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
