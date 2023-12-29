@@ -11,6 +11,11 @@ use Spatie\Permission\Models\Permission;
 
 class userController extends Controller
 {
+    protected $rules = [
+        'user.name' => ['required|string|min:4'],
+        'user.email' => ['required|mail|min:5|max:32|unique:users,id'],
+        'user.activo' => ['boolean'],
+    ];
     /**
      * Display a listing of the resource.
      */
@@ -57,7 +62,12 @@ class userController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd('paso');
+        // dd($request, $user);
+        // dd($this->user, $this->rules);
+        // $validate = $this->validate($this->rules);
+        // $reemplaza = User::updateOrCreate([... ]);
+
+        $user->update($request);
         $user->roles()->sync($request->roles);
 
         return redirect()
